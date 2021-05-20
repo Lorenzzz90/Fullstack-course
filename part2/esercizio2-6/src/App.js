@@ -29,8 +29,8 @@ const App = () => {
       const result = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
       if (result) {
         personService
-          .updatePerson(alreadyExistName.id, newObject)
-          .then(updatedPerson => setPersons(persons.map(person => person.id !== alreadyExistName.id ? person : updatedPerson)))
+          .updatePerson(alreadyExistName._id, newObject)
+          .then(updatedPerson => setPersons(persons.map(person => person._id !== alreadyExistName._id ? person : updatedPerson)))
           .then(
             setMessage(`Updated ${newObject.name}`),
             setTimeout(() => {
@@ -39,15 +39,17 @@ const App = () => {
           .then(() => {
             setNewName("")
             setNewNumber("")
+            console.log('qua')
           })
-          .catch( error => 
-            console.log(error),
-            setError(true),
-            setPersons(persons.filter(person => person.name !== newObject.name)),
-            setMessage(`Information of ${newObject.name} has already beed removed from the server`),
+          .catch(error => {
+            const strError = error.response.data.error
+            setError(true)
+            setMessage(strError)
             setTimeout(() => {
+              setMessage(null)
               setError(false)
-            }, 5000))
+            }, 5000) 
+          })
       }
     }
     else if (persons.find(obj => obj.number === newNumber)) {
@@ -69,10 +71,13 @@ const App = () => {
           setNewNumber("")
         })
         .catch(error => {
-          console.log(error)
-          alert(
-            "Error"
-          )
+          const strError = error.response.data.error
+          setError(true)
+          setMessage(strError)
+          setTimeout(() => {
+            setMessage(null)
+            setError(false)
+          }, 5000) 
         })
         
     }
@@ -110,7 +115,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
 
-      <h3>Numbers</h3>
+      <h3>Numberss</h3>
         <ShowNumbers
           filter={filter} 
           persons={persons}

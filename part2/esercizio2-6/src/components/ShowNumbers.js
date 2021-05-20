@@ -1,15 +1,11 @@
 import React from 'react'
 import personService from '../services/Persons'
 
-
-
-
-
 const ShowNumbers = ({ filter, persons, setPersons }) => {
   const renderPerson = (person) => {
     return (
     <div key={person.name}>
-      {person.name} {person.number} <button value={person.id} onClick={handleDeleteButton}>delete</button>
+      {person.name} {person.number} <button value={person._id} onClick={handleDeleteButton}>delete</button>
     </div>
     )}
 
@@ -23,14 +19,14 @@ const ShowNumbers = ({ filter, persons, setPersons }) => {
   }*/
 
   const handleDeleteButton = (e) => {
-    const personId = parseInt(e.target.value, 10)
-    const p = persons.find(x => x.id === personId)
+    const personId = e.target.value
+    const p = persons.find(x => x._id === personId)
     const result = window.confirm(`Delete ${p.name} ?`)
     if (result) {
       personService
       .deletePerson(personId)
       .then(() => {
-        setPersons(persons.filter(p => p.id !== personId))
+        setPersons(persons.filter(p => p._id !== personId))
       })
     }
   }
