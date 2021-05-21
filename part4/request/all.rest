@@ -1,6 +1,6 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxvcmVueiIsImlkIjoiNjBhNWI5ZDMwNGU0YzI1MTg0YjhiZWM5IiwiaWF0IjoxNjIxNDc5ODU3LCJleHAiOjE2MjE0ODM0NTd9.wvlnzh6p9nMGfcPId6efGnknbDKgvSjKckcZNKftU6k
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxvcmVueiIsImlkIjoiNjBhNWI5ZDMwNGU0YzI1MTg0YjhiZWM5IiwiaWF0IjoxNjIxNTIxODYwLCJleHAiOjE2MjE1MjU0NjB9.55ng8EbuFOl2PAp5pF6KRCghoQD9CXZwvWWuJHUedqI
 
 {
   "title": "Test With Token and userExtractor 2",
