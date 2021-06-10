@@ -9,6 +9,21 @@ blogRouter.get('/', async (request, response) => {
   response.json(blogs.map(blog => blog.toJSON()))
 })
 
+blogRouter.put('/:id', userExtractor, async (request, response) => {
+  const body = request.body
+  const user = request.user
+  const blog = {
+    user: user,
+    likes: body.likes,
+    author: body.author,
+    title: body.title,
+    url: body.url
+  }
+
+  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+  response.json(updatedBlog)
+})
+
 blogRouter.post('/', userExtractor, async (request, response) => {
   const body = request.body
   const user = request.user
@@ -18,12 +33,14 @@ blogRouter.post('/', userExtractor, async (request, response) => {
     title: body.title,
     url: body.url,
     likes: body.likes,
-    user: user._id
+    user: user._id,
+    username: user.username
   })
 
   const savedBlog = await blog.save()
   user.blogs = user.blogs.concat(savedBlog)
   await user.save()
+  console.log(user.username)
   response.json(savedBlog)
 })
 

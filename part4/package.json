@@ -8,7 +8,8 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "start:test": "NODE_ENV=test node index.js"
   },
   "author": "Lorenz",
   "license": "ISC",
